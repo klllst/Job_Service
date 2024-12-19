@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\AdStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->string('status');
+            $table->string('status')->default(AdStatus::Pending);
             $table->double('cost');
             $table->foreignId('employer_id')->nullable()->constrained('users')->onDelete('set null');
             $table->foreignId('worker_id')->nullable()->constrained('users')->onDelete('set null');
