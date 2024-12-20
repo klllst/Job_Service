@@ -81,12 +81,12 @@ class User extends Authenticatable implements JWTSubject
 
     public function responds(): HasMany
     {
-        return $this->hasMany(Response::class, 'responder_id');
+        return $this->hasMany(Review::class, 'responder_id');
     }
 
     public function reviews(): HasMany
     {
-        return $this->hasMany(Response::class, 'reviewer_id');
+        return $this->hasMany(Review::class, 'reviewer_id');
     }
 
     public function getJWTIdentifier(): mixed

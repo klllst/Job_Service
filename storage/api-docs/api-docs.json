@@ -12,6 +12,195 @@
         }
     ],
     "paths": {
+        "/api/ads": {
+            "get": {
+                "tags": [
+                    "Ads"
+                ],
+                "summary": "Retrieve a list of ads",
+                "operationId": "b61a9d1c995d736e8c630d1341e4c9f9",
+                "responses": {
+                    "200": {
+                        "description": "Ads retrieved successfully"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Ads"
+                ],
+                "summary": "Create a new ad",
+                "operationId": "4434211425693fe33a0ee7c8e43c3615",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "description",
+                                    "cost"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "Ad's name",
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "description": "Ad's description",
+                                        "type": "string"
+                                    },
+                                    "cost": {
+                                        "description": "Ad's cost",
+                                        "type": "number",
+                                        "format": "double"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Ad created successfully"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/ads/{id}": {
+            "put": {
+                "tags": [
+                    "Ads"
+                ],
+                "summary": "Update an existing ad",
+                "operationId": "af900aaad23c3abb987ec7ec778158bc",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Ad ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "Ad's name",
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "description": "Ad's description",
+                                        "type": "string"
+                                    },
+                                    "cost": {
+                                        "description": "Ad's cost",
+                                        "type": "number"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ad updated successfully"
+                    },
+                    "400": {
+                        "description": "Insufficient funds"
+                    },
+                    "404": {
+                        "description": "Ad not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Ads"
+                ],
+                "summary": "Complete the ad",
+                "operationId": "133b65441455c5543c9d9a5306170ee4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Ad ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Ad completed successfully"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Ads"
+                ],
+                "summary": "Delete an ad",
+                "operationId": "f4cdacee1824a5141db549d7509fedce",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Ad ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ad deleted successfully"
+                    },
+                    "404": {
+                        "description": "Ad not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/auth/register": {
             "post": {
                 "tags": [
@@ -156,6 +345,428 @@
                     }
                 ]
             }
+        },
+        "/api/profile/responses": {
+            "get": {
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "Get all user's responses",
+                "operationId": "b1875314c368be202ebf5fd1122350a5",
+                "responses": {
+                    "201": {
+                        "description": "Responses retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/profile/ads": {
+            "get": {
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "Get all user's ads",
+                "operationId": "e527ce8f9528a1f2ede2a9b785dee184",
+                "responses": {
+                    "201": {
+                        "description": "Responses ads successfully"
+                    },
+                    "400": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/profile/reviews": {
+            "get": {
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "Get all user's reviews",
+                "operationId": "47def5dce05e3685a33af28bffe3e0a1",
+                "responses": {
+                    "201": {
+                        "description": "Reviews retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/ads/{ad}/responses": {
+            "get": {
+                "tags": [
+                    "Responses"
+                ],
+                "summary": "Get all responses for an ad",
+                "operationId": "14f71d2a2b17d51d2b0d1b01d7f5031e",
+                "parameters": [
+                    {
+                        "name": "ad",
+                        "in": "path",
+                        "description": "Ad ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Responses retrieved su"
+                    },
+                    "400": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Responses"
+                ],
+                "summary": "Create a new response for an ad",
+                "operationId": "6a57ef115e306531eadc13954b246062",
+                "parameters": [
+                    {
+                        "name": "ad",
+                        "in": "path",
+                        "description": "Ad ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Response created successfully"
+                    },
+                    "400": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/ads/{ad}/responses/{response}": {
+            "delete": {
+                "tags": [
+                    "Responses"
+                ],
+                "summary": "Delete a response for an ad",
+                "operationId": "8506fb27ac02bc3d254f02863af70427",
+                "parameters": [
+                    {
+                        "name": "ad",
+                        "in": "path",
+                        "description": "Ad ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "response",
+                        "in": "path",
+                        "description": "Response ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Response deleted successfully"
+                    },
+                    "400": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/ads/{ad}/responses/{response}/accept": {
+            "post": {
+                "tags": [
+                    "Responses"
+                ],
+                "summary": "Accept a response for an ad",
+                "operationId": "0da622af15259168508c6b820bf95106",
+                "parameters": [
+                    {
+                        "name": "ad",
+                        "in": "path",
+                        "description": "Ad ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "response",
+                        "in": "path",
+                        "description": "Response ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Response accepted"
+                    },
+                    "400": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/ads/{ad}/responses/{response}/reject": {
+            "post": {
+                "tags": [
+                    "Responses"
+                ],
+                "summary": "Reject a response for an ad",
+                "operationId": "b2c4e6fdce5ea18ab981629a97f4039a",
+                "parameters": [
+                    {
+                        "name": "ad",
+                        "in": "path",
+                        "description": "Ad ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "response",
+                        "in": "path",
+                        "description": "Response ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Response rejected"
+                    },
+                    "400": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/ads/{ad}/reviews": {
+            "post": {
+                "tags": [
+                    "Reviews"
+                ],
+                "summary": "Create a new review",
+                "operationId": "a4056c59fa564c80bed1fcec86f0896f",
+                "parameters": [
+                    {
+                        "name": "ad",
+                        "in": "path",
+                        "description": "ID of the ad",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "description",
+                                    "score"
+                                ],
+                                "properties": {
+                                    "description": {
+                                        "description": "Review description",
+                                        "type": "string"
+                                    },
+                                    "score": {
+                                        "description": "Review score",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Review created successfully"
+                    },
+                    "400": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/ads/{ad}/reviews/{review}": {
+            "delete": {
+                "tags": [
+                    "Reviews"
+                ],
+                "summary": "Delete a review",
+                "operationId": "8ede13c39573a334568efe8c604218cb",
+                "parameters": [
+                    {
+                        "name": "ad",
+                        "in": "path",
+                        "description": "ID of the ad",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "review",
+                        "in": "path",
+                        "description": "ID of the review to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Review deleted successfully"
+                    },
+                    "404": {
+                        "description": "Review not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/supports": {
+            "get": {
+                "tags": [
+                    "Supports"
+                ],
+                "summary": "Get all user's supports",
+                "operationId": "12047a1faa5b8b3b227c82d6a68ca036",
+                "responses": {
+                    "201": {
+                        "description": "Supports retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Supports"
+                ],
+                "summary": "Create a new support",
+                "operationId": "de57aa019aa0df3c0525f414b9a4e14f",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "description",
+                                    "cost"
+                                ],
+                                "properties": {
+                                    "theme": {
+                                        "description": "Support's name",
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "description": "Support's description",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Support created successfully"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -169,8 +780,28 @@
     },
     "tags": [
         {
+            "name": "Ads",
+            "description": "Ads"
+        },
+        {
             "name": "Auth",
             "description": "Auth"
+        },
+        {
+            "name": "Profile",
+            "description": "Profile"
+        },
+        {
+            "name": "Responses",
+            "description": "Responses"
+        },
+        {
+            "name": "Reviews",
+            "description": "Reviews"
+        },
+        {
+            "name": "Supports",
+            "description": "Supports"
         }
     ]
 }

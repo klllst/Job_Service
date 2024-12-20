@@ -9,4 +9,5 @@ enum AdStatus: string
     case Published = 'published';
     case Draft = 'draft';
     case Pending = 'pending';
+    case InProgress = 'in_progress';
 }
