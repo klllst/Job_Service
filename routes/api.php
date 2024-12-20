@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AdController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\ResponseController;
 use App\Http\Controllers\Api\ReviewController;
@@ -50,5 +51,10 @@ Route::middleware('auth:api')->group(function () {
     Route::prefix('supports')->group(function () {
         Route::get('/', [SupportController::class, 'index']);
         Route::post('/', [SupportController::class, 'store']);
+    });
+
+    Route::prefix('payments')->group(function () {
+        Route::post('/replenish', [PaymentController::class, 'replenish']);
+        Route::post('/withdraw', [PaymentController::class, 'withdraw']);
     });
 });

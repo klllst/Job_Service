@@ -346,6 +346,88 @@
                 ]
             }
         },
+        "/api/payments/replenish": {
+            "post": {
+                "tags": [
+                    "Payment"
+                ],
+                "summary": "Replenish balance",
+                "operationId": "ca74af62c88b6a1596fd31a981227bad",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "sum"
+                                ],
+                                "properties": {
+                                    "sum": {
+                                        "description": "Money sum",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful replenishment"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/payments/withdraw": {
+            "post": {
+                "tags": [
+                    "Payment"
+                ],
+                "summary": "Withdraw from balance",
+                "operationId": "ff6bfb132141da0179e85ad16547a613",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "sum"
+                                ],
+                                "properties": {
+                                    "sum": {
+                                        "description": "Money sum",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful withdraw"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/profile/responses": {
             "get": {
                 "tags": [
@@ -786,6 +868,10 @@
         {
             "name": "Auth",
             "description": "Auth"
+        },
+        {
+            "name": "Payment",
+            "description": "Payment"
         },
         {
             "name": "Profile",

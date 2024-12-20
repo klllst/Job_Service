@@ -52,7 +52,7 @@ class ReviewController extends Controller
 
         $review = $ad->review()->create($data);
 
-        $responder = $ad->employer;
+        $responder = $ad->worker;
 
         $rating = Review::where('responder_id', $responder->id)->avg('score');
         $responder->update([
